@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>测试</title>
+	<meta charset="utf-8">
+	<style type="text/css">
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		#form{
+			width: 300px;
+			background: yellow;
+			text-align: center;
+			padding: 30px 0;
+			margin: 100px auto;
+		}
+	</style>
+</head>
+<body>
+	<form id="form">
+		<p><input type="text" placeholder="请输入" id="username"></p>
+		<span></span>
+		<p><input type="text" placeholder="请输入" id="chinaname"></p>
+		<span></span>
+		<p><input type="text" placeholder="请输入" id="email"></p>
+		<span></span>
+		<p><input type="submit" id="submit" ></p>
+	</form>
+	<script type="text/javascript">
+		//获取节点
+		var span = document.getElementsByTagName('span');
+		var form = document.getElementById('form');
+		var username = document.getElementById('username');
+		var chinaname = document.getElementById('chinaname');
+		var email = document.getElementById('email');
+		var submit = document.getElementById('submit');
+		var input1 = false;
+		var input2 = false;
+		var input3 = false;
+		//账号认证,只设置了失去焦点触发的事件
+		username.onblur=function(){
+			var usernamePattern = /^\w{6,18}$/;
+			if (this.value=="") {
+				span[0].innerHTML="用户名不能为空";
+				span[0].style.color="red";
+			}else{
+				if(!usernamePattern.test(username.value)){
+					span[0].innerHTML="请输入6--18位数字、字母、_";
+					span[0].style.color="red";
+				}else{
+					span[0].innerHTML="合法";
+					span[0].style.color="green";
+					input1 = true;
+				}
+			}
+		}
+		//中国名字认证
+		chinaname.onblur=function(){
+			var chinanamePattern = /^[\u4e00-\u9fa5]{2,4}$/;
+			if (this.value=="") {
+				span[1].innerHTML="用户名不能为空";
+				span[1].style.color="red";
+			}else{
+				if(!chinanamePattern.test(chinaname.value)){
+					span[1].innerHTML="请输入两位到四位的中文";
+					span[1].style.color="red";
+				}else{
+					span[1].innerHTML="合法";
+					span[1].style.color="green";
+					input2 = true;
+				}
+			}
+		}
+		//邮箱认证
+		email.onblur=function(){
+			var emailPattern = /^\w+@\w+[\.\w]+$/;
+			if (this.value=="") {
+				span[2].innerHTML="用户名不能为空";
+				span[2].style.color="red";
+			}else{
+				if(!emailPattern.test(email.value)){
+					span[2].innerHTML="输入不合法";
+					span[2].style.color="red";
+				}else{
+					span[2].innerHTML="合法";
+					span[2].style.color="green";
+					input3 = true;
+				}
+			}
+		}
+		//提交功能
+		submit.onclick=function(){
+			if (input1==false||input2==false||input3==false) {
+				alert("注册失败");
+			}else{
+				alert("注册成功");
+			}
+		}
+	</script>
+</body>
+</html>
